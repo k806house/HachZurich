@@ -74,8 +74,8 @@ function Form(props) {
         <button class="btn-custom" onClick={() => isChartVisibleSet(true)}>
             Calculate
           </button>
-          {isChartVisible && <Chart data={props.test} />}
       </div>
+      {isChartVisible && <Chart id="chart" data={props.test} />}
     </div>
   );
 }
