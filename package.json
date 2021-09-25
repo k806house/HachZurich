@@ -13,6 +13,8 @@
     "react": "^16.13.1",
     "react-datepicker": "^4.2.1",
     "react-dom": "^16.13.1",
+    "react-geocode-earth-autocomplete": "^1.0.0",
+    "react-google-places-autocomplete": "^3.3.2",
     "react-i18next": "^11.12.0",
     "react-modal-image": "^2.5.0",
     "react-scripts": "3.4.1",

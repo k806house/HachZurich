@@ -3,6 +3,7 @@ import Chart from "./chart";
 import DatePicker from "react-datepicker";
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 function Form(props) {
   const [isChartVisible, isChartVisibleSet] = useState(false);
@@ -16,13 +17,7 @@ function Form(props) {
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Address</label>
-            <input
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder=""
-            />
+            <GooglePlacesAutocomplete id="exampleInputEmail1" apiKey="***" />
           </div>
           <div class="form-group">
             <label for="inputState">Material</label>
