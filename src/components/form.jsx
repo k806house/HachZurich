@@ -17,11 +17,11 @@ function Form(props) {
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Address</label>
-            <GooglePlacesAutocomplete id="exampleInputEmail1" apiKey="***" />
+            <GooglePlacesAutocomplete id="exampleInputEmail1" apiKey="AIzaSyBm0daC_f_RULH4JX2VY04djhaKh48wF30" />
           </div>
           <div class="form-group">
             <label for="inputState">Material</label>
-            <select id="inputState" class="form-control">
+            <select disabled={isChartVisible} id="inputState" class="form-control">
               <option selected>Concrete</option>
               <option>Glass</option>
               <option>Stell</option>
@@ -34,6 +34,7 @@ function Form(props) {
                 class="form-control"
                 id="exampleInputPassword1"
                 placeholder="10"
+                disabled={isChartVisible}
               />
               <small>m²</small>
             </form>
@@ -43,6 +44,7 @@ function Form(props) {
               type="checkbox"
               class="form-check-input"
               id="exampleCheck1"
+              disabled={isChartVisible}
             />
             <label class="form-check-label" for="exampleCheck1">
               Special equipment
@@ -54,6 +56,7 @@ function Form(props) {
               className="date-picker"
               id="picker"
               selected={startDate}
+              disabled={isChartVisible}
               onChange={(date) => setStartDate(date)}
               showTimeSelect
               includeTimes={[
