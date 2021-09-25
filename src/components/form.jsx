@@ -3,13 +3,23 @@ import Chart from "./chart";
 import DatePicker from "react-datepicker";
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import GooglePlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-google-places-autocomplete";
+import $ from "jquery";
 
 function Form(props) {
   const [isChartVisible, isChartVisibleSet] = useState(false);
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(new Date(), 30), 16)
   );
+  const [volume, setVolume] = useState(10);
+
+  const [address, setAddress] = useState("");
+
+  const [data, setData] = useState("");
+
   return (
     <div className="div-form">
       <div className="div-form-inner">
@@ -17,11 +27,27 @@ function Form(props) {
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Address</label>
-            <GooglePlacesAutocomplete id="exampleInputEmail1" apiKey="AIzaSyBm0daC_f_RULH4JX2VY04djhaKh48wF30" />
+            {!isChartVisible && (
+              <GooglePlacesAutocomplete
+                selectProps={{
+                  address,
+                  onChange: setAddress,
+                }}
+                id="exampleInputEmail1"
+                apiKey="AIzaSyAYJzG9FG4SxLJd-3fEGNlkmR9fCUuH3jc"
+              />
+            )}
+            {isChartVisible && (
+              <select disabled={true} id="inputState2" class="form-control">
+                <option selected>{address}</option>
+                <option>Glass</option>
+                <option>Stell</option>
+              </select>
+            )}
           </div>
           <div class="form-group">
             <label for="inputState">Material</label>
-            <select disabled={isChartVisible} id="inputState" class="form-control">
+            <select disabled={true} id="inputState" class="form-control">
               <option selected>Concrete</option>
               <option>Glass</option>
               <option>Stell</option>
@@ -33,7 +59,8 @@ function Form(props) {
               <input
                 class="form-control"
                 id="exampleInputPassword1"
-                placeholder="10"
+                value={volume}
+                onInput={(e) => setVolume(e)}
                 disabled={isChartVisible}
               />
               <small>m²</small>
@@ -69,9 +96,24 @@ function Form(props) {
             />
           </div>
         </form>
-        <button class="btn-custom" onClick={() => isChartVisibleSet(true)}>
-            Calculate
-          </button>
+        <button
+          class="btn-custom"
+          disabled={isChartVisible}
+          onClick={() => {
+            isChartVisibleSet(true);
+            console.log(address);
+            $.getJSON("https://randomuser.me/api/json", {
+              address: address,
+              volume: volume,
+              date: startDate,
+            }).then(({ results }) => {
+              setData(results);
+              isChartVisibleSet(true);
+            });
+          }}
+        >
+          Calculate
+        </button>
       </div>
       {isChartVisible && <Chart id="chart" data={props.test} />}
     </div>

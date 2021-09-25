@@ -25,22 +25,17 @@ function Navigation() {
           <ul className="nav navbar-nav navbar-right">
             <li>
               <a className="page-scroll">
-                SomeText
+                History
               </a>
             </li>
             <li>
               <a className="page-scroll">
-                SomeText
+                Help
               </a>
             </li>
             <li>
               <a className="page-scroll">
-                SomeText
-              </a>
-            </li>
-            <li>
-              <a className="page-scroll">
-                SomeText
+                Log out
               </a>
             </li>
           </ul>
