@@ -100,7 +100,6 @@ function Form(props) {
           </div>
         </form>
         <div>
-        {data.loading?'':data.volume}
         </div>
         <button
           class="btn-custom"
@@ -118,7 +117,7 @@ function Form(props) {
           Calculate
         </button>
       </div>
-      {isChartVisible && <Chart id="chart" data={data} />}
+      {isChartVisible && !data.loading && <Chart id="chart" data={data} />}
     </div>
   );
 }
