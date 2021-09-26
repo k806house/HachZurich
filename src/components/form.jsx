@@ -18,7 +18,10 @@ function Form(props) {
 
   const [address, setAddress] = useState("");
 
-  const [data, setData] = useState("");
+  const [data, setData] = useState({
+  value: '',
+  loading: true,
+});
 
   return (
     <div className="div-form">
@@ -34,12 +37,12 @@ function Form(props) {
                   onChange: setAddress,
                 }}
                 id="exampleInputEmail1"
-                apiKey="AIzaSyAYJzG9FG4SxLJd-3fEGNlkmR9fCUuH3jc"
+                apiKey="***"
               />
             )}
             {isChartVisible && (
               <select disabled={true} id="inputState2" class="form-control">
-                <option selected>{address}</option>
+                <option selected>{address.label}</option>
                 <option>Glass</option>
                 <option>Stell</option>
               </select>
@@ -96,26 +99,26 @@ function Form(props) {
             />
           </div>
         </form>
+        <div>
+        {data.loading?'':data.volume}
+        </div>
         <button
           class="btn-custom"
           disabled={isChartVisible}
           onClick={() => {
             isChartVisibleSet(true);
             console.log(address);
-            $.getJSON("https://randomuser.me/api/json", {
-              address: address,
+            $.getJSON("http://localhost:8080/predict?", {
+              address: address.labels,
               volume: volume,
               date: startDate,
-            }).then(({ results }) => {
-              setData(results);
-              isChartVisibleSet(true);
-            });
-          }}
-        >
+            })
+              .then(data => {setData( {value:data, loading:false}); console.log(data)});}}
+>
           Calculate
         </button>
       </div>
-      {isChartVisible && <Chart id="chart" data={props.test} />}
+      {isChartVisible && <Chart id="chart" data={data} />}
     </div>
   );
 }

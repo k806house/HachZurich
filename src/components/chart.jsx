@@ -32,7 +32,7 @@ function Chart(props) {
           marker: { color: "green" },
         }
       ]}
-      layout={{ width: 700, height: 320, title: "Departure variants", showlegend: false, yaxis: {tick0: 0, dtick: 1,} }}
+      layout={{ width: 700, height: 320, title: props.loading?'':props.volume, showlegend: false, yaxis: {tick0: 0, dtick: 1,} }}
       config={{ displayModeBar: false, scrollZoom: false }}
     />
   );
