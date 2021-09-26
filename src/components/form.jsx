@@ -26,7 +26,7 @@ function Form(props) {
   return (
     <div className="div-form">
       <div className="div-form-inner">
-        <h3>Самый известный завод Швейцарии</h3>
+        <h3>T41 Teskey Plant2 Ready Mix</h3>
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Address</label>
@@ -37,7 +37,7 @@ function Form(props) {
                   onChange: setAddress,
                 }}
                 id="exampleInputEmail1"
-                apiKey="***"
+                apiKey="AIzaSyC5itPtRJkmEca4fCzhWmY5CeUO97smcVg"
               />
             )}
             {isChartVisible && (
@@ -108,16 +108,16 @@ function Form(props) {
             isChartVisibleSet(true);
             console.log(address);
             $.getJSON("http://localhost:8080/predict?", {
-              address: address.labels,
+              address: address.label,
               volume: volume,
-              date: startDate,
+              date: startDate.toJSON(),
             })
-              .then(data => {setData( {value:data, loading:false}); console.log(data)});}}
+              .then(data => {setData({value:data, loading:false}); console.log(data)});}}
 >
           Calculate
         </button>
       </div>
-      {isChartVisible && !data.loading && <Chart id="chart" data={data} />}
+      {isChartVisible && !data.loading && <Chart id="chart" data={data.value} />}
     </div>
   );
 }
